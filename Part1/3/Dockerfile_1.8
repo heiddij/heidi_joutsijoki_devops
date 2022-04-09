@@ -1,0 +1,18 @@
+# Start from the ubuntu image
+FROM ubuntu:latest
+
+# Use /usr/src/app as our workdir. The following instructions will be executed in this location.
+WORKDIR /usr/src/app
+
+# Copy the curlscript.txt file from this location to /usr/src/app/ creating /usr/src/app/curlscript.tx
+COPY curlscript.txt .
+
+# Alternatively, if we skipped chmod earlier, we can add execution permissions during the build.
+RUN chmod +x curlscript.txt
+
+RUN apt-get update 
+
+RUN apt-get install -y curl
+
+# When running docker run the command will be ./curlscript.txt
+CMD ./curlscript.txt
